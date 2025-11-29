@@ -1,59 +1,115 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Clean Laravel 12 Setup
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A ready-to-use Laravel 12 project template for developers with slow internet connections. Instead of running `composer create-project laravel/laravel` which downloads large dependencies, simply clone this repository and set it up locally.
 
-## About Laravel
+## Prerequisites
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Before you begin, make sure you have the following installed:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [PHP 8.2 or higher](https://www.php.net/downloads.php)
+- [Composer](https://getcomposer.org/)
+- [Node.js & npm](https://nodejs.org/)
+- [Git](https://git-scm.com/)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Getting Started
 
-## Learning Laravel
+Clone this repository:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+```bash
+git clone https://github.com/wyattmatt/clean-laravel-12-setup.git
+cd clean-laravel-12-setup
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Quick Setup (Recommended)
 
-## Laravel Sponsors
+Run the automated setup script that handles everything for you:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer setup
+```
 
-### Premium Partners
+This command will:
+- Install PHP dependencies
+- Copy `.env.example` to `.env`
+- Generate application key
+- Create SQLite database and run migrations
+- Install JavaScript dependencies
+- Build frontend assets
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Then start the development server:
 
-## Contributing
+```bash
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Your application will be available at `http://localhost:8000`
 
-## Code of Conduct
+## Manual Setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+If you prefer to set up step by step:
 
-## Security Vulnerabilities
+1. **Install Composer dependencies**
+   ```bash
+   composer install
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Copy environment file**
+   ```bash
+   cp .env.example .env
+   ```
 
-## License
+3. **Generate application key**
+   ```bash
+   php artisan key:generate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Create database and run migrations**
+   ```bash
+   touch database/database.sqlite
+   php artisan migrate
+   ```
+
+5. **Install JavaScript dependencies** (optional, needed for frontend assets)
+   ```bash
+   npm install
+   npm run build
+   ```
+
+6. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
+
+## Development Mode
+
+For active development with hot module replacement, use the full development environment:
+
+```bash
+composer dev
+```
+
+This command runs:
+- Laravel development server
+- Queue worker
+- Log viewer (Pail)
+- Vite dev server with hot reload
+
+All services run concurrently and will stop together when you press Ctrl+C.
+
+Alternatively, run them separately in different terminal windows:
+
+```bash
+# Terminal 1: Laravel server
+php artisan serve
+
+# Terminal 2: Vite dev server (for frontend)
+npm run dev
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+composer test
+```
