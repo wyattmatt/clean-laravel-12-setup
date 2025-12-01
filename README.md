@@ -65,7 +65,9 @@ If you prefer to set up step by step:
 
 4. **Create database and run migrations**
    ```bash
-   touch database/database.sqlite
+   type nul > database/database.sqlite                        # CMD
+   New-Item -Path database/database.sqlite -ItemType File     # PowerShell
+   touch database/database.sqlite                             # Linux/Mac
    php artisan migrate
    ```
 
